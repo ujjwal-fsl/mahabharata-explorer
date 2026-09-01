@@ -25,3 +25,15 @@ This document establishes the high-level project constitution and core principle
 13. **Strict Truthfulness**: Do not treat missing information as permission to invent information.
 14. **Verification Requirement**: Do not declare a feature complete merely because it compiles; implementation must eventually be tested against its requirements.
 15. **Setup Scope**: During this setup task, do not implement any application functionality.
+
+## Persistent Agent Rules
+
+Detailed persistent rules governing development behavior are located in `.agents/rules/`:
+- `01-project-principles.md` — Core identity, exploration loop, and operating principles
+- `02-architecture.md` — 5-layer architecture, unified knowledge graph, and system reuse
+- `03-data-integrity.md` — Zero fabrication, epistemic data states, and truth standards
+- `04-scope-discipline.md` — Phased roadmap stages and V1/V2/V3 scope boundaries
+- `05-frontend.md` — Component reuse, state hierarchy, and data-driven UI
+- `06-responsive.md` — Multi-device support and interaction adaptation
+- `07-visual-language.md` — Modern First / Traditional Second and cultural guidelines
+- `08-testing.md` — Quality gates, verification checklist, and definition of done
