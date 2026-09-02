@@ -88,7 +88,7 @@ Because V1 is a read-heavy, low-mutation workload, query execution is optimized 
 
 ### 4.2. Timeline & Chronology Slicing (REQ-TIM-03)
 - **Level of Detail (LOD) Projections**: High-level timeline overviews query major milestone events (`importance >= 4`), while granular sub-events are loaded on demand during zoom/pan interactions.
-- **Sequential Paging**: Cursor pagination using `(sequence_index, id)` eliminates high-offset table scan overhead.
+- **Sequential Query Optimization**: Timeline queries should use the chronological `(sequence_index, id)` ordering and appropriate indexing to support deterministic sequential retrieval while preserving the public offset-pagination contract defined by B5.
 
 ### 4.3. Geographic Map & Spatial Bounding-Box Queries (REQ-LOC-04)
 - **Bounding Box Slicing**: Queries filter by viewport bounds (`WHERE latitude BETWEEN :min_lat AND :max_lat AND longitude BETWEEN :min_lng AND :max_lng`).
@@ -234,7 +234,7 @@ In preparation for Block B12 verification:
 | **Fast Navigation Latency** | Context §4.O (REQ-PRF-02); PRD §16 | Section 2, Section 3: B-tree slug lookups, PostgreSQL buffer pool. |
 | **Explicit Numeric Budgets** | Context §4.O (REQ-PRF-03); PRD §16 | Section 2: Established formal latency ($\le 50\text{--}100\text{ ms}$) and payload ($\le 100\text{--}500\text{ KB}$) budgets. |
 | **Static & Graph Entity Caching** | Context §4.O (REQ-PRF-04); Detailed Ref §16 | Section 6: HTTP `Cache-Control`, `ETag`, and edge caching architecture. |
-| **Timeline LOD & Slicing** | Context §4.E (REQ-TIM-03); PRD §9.2 | Section 4.2: Milestone LOD filtering and sequential cursor pagination. |
+| **Timeline LOD & Slicing** | Context §4.E (REQ-TIM-03); PRD §9.2 | Section 4.2: Milestone LOD filtering and deterministic sequential query optimization under the public offset-pagination contract. |
 | **Spatial Bounding Box Queries** | Context §4.G (REQ-LOC-04); PRD §9.6 | Section 4.3: Viewport coordinate filtering with graceful null handling. |
 | **War Day Progressive Loading** | Context §4.H (REQ-WAR-03); PRD §9.7 | Section 4.4: Day-by-day partitioned queries on Kurukshetra War days. |
 | **Stateless URLs & Integrity** | Context §4.K (REQ-STA-01); Rule 03 | Section 1, Section 6: Stateless URL resolution without compromising truth states. |
