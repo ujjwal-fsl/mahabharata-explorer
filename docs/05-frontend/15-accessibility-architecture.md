@@ -30,7 +30,7 @@
 │ Downstream Deps  │ - Stage 2 Block F17: Performance & Testing          │
 │                  │ - Stage 4: Implementation Phase                     │
 ├──────────────────┼─────────────────────────────────────────────────────┤
-│ Status           │ Draft Architectural Specification (Review Pending) │
+│ Status           │ Approved Architectural Specification                │
 └──────────────────┴─────────────────────────────────────────────────────┘
 ```
 

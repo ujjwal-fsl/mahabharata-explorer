@@ -64,7 +64,7 @@ The search and autocomplete UX architecture is governed by 10 foundational princ
 │ 4. CANONICAL ENTITY NAVIGATION: Selecting an autocomplete suggestion   │
 │    navigates directly to the canonical entity destination defined by   │
 │    Block F7, bypassing unnecessary intermediary search-results screens.│
-│ 5. EPISTEMIC FIDELITY: Search results present certainty states using   │
+│ 5. EPISTEMIC FIDELITY: Search results present epistemic states using   │
 │    the six canonical B2 values only; certainty is never fabricated.    │
 │ 6. MULTILINGUAL & SCRIPT RESPECT: Query processing transparently       │
 │    preserves Unicode characters, IAST diacritics, and Devanāgarī.      │
@@ -172,7 +172,7 @@ Suggestions present high-density, disambiguated metadata enabling scholarly prec
 2. **Original Script Representation**: Secondary Devanāgarī rendering (e.g., अर्जुन) displayed in accordance with client script preferences governed by Block F5 and Block F16.
 3. **Resource Category**: Semantic badge indicating domain classification (*Character*, *Location*, *Group*, *Event*, *War*, *Formation*).
 4. **Disambiguation Context**: Brief ancestral or narrative tag to differentiate duplicate names (e.g., *Droṇa [Achārya]* vs. *Droṇa [Kāka]*).
-5. **Epistemic Certainty Badge**: Visual non-color indicator (Block F3 §12) presenting one of the six canonical B2 epistemic states:
+5. **Epistemic Status Badge**: Visual non-color indicator (Block F3 §12) presenting one of the six canonical B2 epistemic states (`epistemic_status`):
    - `known`: Established epic figure or event.
    - `conflicting`: Disputed lineage or conflicting narrative accounts.
    - `approximate`: Approximate chronological or spatial attribution.
@@ -206,7 +206,7 @@ When a query is formally submitted, the application navigates to the dedicated `
 ### 6.1 Progressive Disclosure on Result Cards
 1. **Primary Layer**: Canonical title, IAST transliteration, category badge, and one-sentence primary identification.
 2. **Secondary Context Layer**: Narrative summary, primary Parva occurrences, and key kinship/alliance connections.
-3. **Evidence Preview**: Scholarly citation locator count (e.g., *"{count} verified Critical Edition references"*); clicking opens the Evidence Drawer (Block F15) without leaving the search context.
+3. **Evidence Preview**: Scholarly citation locator count (e.g., *"{count} source references"*); clicking opens the Evidence Drawer (Block F15) without leaving the search context.
 4. **Primary Navigation Action**: Prominent link navigating to the target entity route defined by Block F7 (`/characters/:slug`, `/geography/:slug`, etc.).
 
 ### 6.2 Filter and Facet Integration

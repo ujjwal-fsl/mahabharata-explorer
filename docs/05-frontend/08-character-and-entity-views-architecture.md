@@ -103,7 +103,7 @@ Canonical entity views share a common five-tier information hierarchy, with doma
 │ - Canonical Name (IAST) + Script Representation (Devanāgarī)           │
 │ - Curated Portrait (if authentic image exists; NO default silhouette)  │
 │ - Domain Classification Badge (e.g., Character, Location, Group)       │
-│ - Epistemic Certainty Indicator (Six B2 States)                        │
+│ - Epistemic Status Indicator (Six B2 States: `epistemic_status`)       │
 │ - Known Aliases / Epithets (`alternate_names`)                         │
 ├────────────────────────────────────────────────────────────────────────┤
 │ TIER 2: PRIMARY BIOGRAPHICAL / DESCRIPTIVE OVERVIEW                    │

@@ -231,7 +231,7 @@ F7 defines the authoritative route hierarchy, parameter locations, serialization
 - **Query Parameters**:
   - `q`: Search query string supporting standard Unicode and IAST characters (owned by F8).
   - `category`: Entity filter domain (owned by F8).
-  - `status`: Epistemic certainty filter (owned by F8).
+  - `status`: Epistemic status filter (`epistemic_status`, owned by F8).
   - `offset`, `limit`: Bounded public offset pagination parameters.
 
 ---

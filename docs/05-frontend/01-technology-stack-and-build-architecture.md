@@ -34,12 +34,12 @@ The technology stack must satisfy the requirements derived from the project cons
 
 | Requirement Area | Architectural Description & Scope | Classification |
 | :--- | :--- | :--- |
-| **Interactive Discovery** | Multi-lens exploration across 10 distinct lenses (Characters, Lineage, Graph, Timeline, Map, Wars, Vyuhas, Sources, Search, Focus). | **MUST** |
+| **Interactive Discovery** | Multi-lens exploration across 10 distinct lenses (Characters, Family Lineage, General Relationships, Timeline, Geography, Dynasties/Factions, War, Battlefield Vyuhas, Global Search, Global Focus Graph). | **MUST** |
 | **Rich Visualizations** | Smooth rendering of interactive network graphs, genealogical DAGs, chronological timelines, spatial viewports, and tactical SVG formations. | **MUST** |
 | **Responsive Parity** | Parity across Desktop, Laptop, Tablet, and Mobile in both Portrait and Landscape orientations. | **MUST** |
 | **Progressive Disclosure** | Progressive loading aligned with endpoint-specific backend payload targets defined by B9, requesting and rendering only the data needed for the active exploration context. | **MUST** |
 | **Deep Linkability** | Stateless, URL-addressable navigation for all canonical entities, active lenses, filters, and Focus subgraphs. | **MUST** |
-| **Accessibility (a11y)** | WCAG 2.1 AA compliance, semantic DOM elements, full keyboard navigation, screen reader support, and textual alternatives for complex visuals. | **MUST** |
+| **Accessibility (a11y)** | WCAG 2.2 Level AA conformance, semantic DOM elements, full keyboard navigation, screen reader support, and textual alternatives for complex visuals. | **MUST** |
 | **Anonymous Read-Only** | 100% unauthenticated exploration with zero client-side secret storage or administrative mutation forms. | **MUST** |
 | **Zero Fabrication** | Explicit UI rendering for epistemic uncertainty (`unknown`, `conflicting`, `approximate`, `unmapped`); no synthetic text or speculative artwork. | **MUST** |
 | **Build Performance** | Fast development server startup, rapid HMR, optimized tree-shaking, and lazy route/visualization chunk splitting. | **SHOULD** |
@@ -58,8 +58,8 @@ To select the core UI framework and application model, three prominent modern fr
 │ Evaluation Factor │ React 19+    │ Vue 3+       │ Svelte 5 / Kit       │
 ├───────────────────┼──────────────┼──────────────┼──────────────────────┤
 │ Visualization     │ **Broad &    │ Strong       │ Moderate             │
-│ Ecosystem (D3/Viz)│ Mature**     │ (Good wrapper│ (Manual DOM/canvas   │
-│                   │ (Extensive adapters for D3, Cytoscape, MapLibre, React Flow)│ support, smaller ecosystem)│ lifecycle binding needed)│
+│ Ecosystem (Viz)   │ Mature**     │ (Good wrapper│ (Manual DOM/canvas   │
+│                   │ (Extensive adapters for canvas, SVG, and WebGL)│ support, smaller ecosystem)│ lifecycle binding needed)│
 ├───────────────────┼──────────────┼──────────────┼──────────────────────┤
 │ Component Model & │ **Declarative**│ Template +   │ Runes / Compiler     │
 │ Complex State     │ Unidirectional, predictable state reflow │ Reactive proxy model│ Fine-grained signals │
@@ -86,7 +86,7 @@ To select the core UI framework and application model, three prominent modern fr
 ### 3.2 Framework Selection
 - **Selected Framework**: **React 19+ (TypeScript)**.
 - **Rationale**:
-  1. *Broad and Mature Visualization Ecosystem*: React provides an extensive ecosystem of battle-tested bindings and lifecycle adapters for complex canvas, WebGL, SVG, and graph rendering engines (Cytoscape, D3, MapLibre, React Flow).
+  1. *Broad and Mature Visualization Ecosystem*: React provides an extensive ecosystem of battle-tested bindings and lifecycle adapters for complex canvas, WebGL, SVG, and graph rendering engines.
   2. *Accessible UI Primitives*: Broad availability of headless ARIA primitive libraries (e.g., Radix UI, Floating UI) ensures accessible dropdowns, dialogs, drawers, and tooltips without fighting framework wrappers.
   3. *Unidirectional Data Flow*: Predictable unidirectional rendering minimizes state tearing across multi-pane exploration layouts (e.g., synchronizing a timeline scrubber with a map viewport).
   4. *Suitability for AI-Assisted Engineering*: Standard TSX component patterns offer strong code clarity, static typing, and modular discoverability within the Google Antigravity environment.
@@ -172,7 +172,7 @@ The build architecture utilizes **Vite 6+**, providing an optimized developer ex
 To maintain responsive initial page loads and satisfy B9 performance guidelines:
 1. **Core Application Shell**: Bundles the main navigation shell, global search modal, and base typography into a minimal initial entry chunk.
 2. **Route-Level Splitting**: Each primary exploration lens (Character Profile, War Explorer, Timeline) is packaged as an independent, lazy-loaded chunk loaded on demand upon navigation.
-3. **Heavy Visualization Isolation**: Heavy rendering libraries (Graph canvas engines, MapLibre GL, D3 tree layout modules) are segregated into dedicated dynamic chunks, ensuring users visiting text/profile views do not download unused visualization binaries.
+3. **Heavy Visualization Isolation**: Heavy rendering libraries (graph visualization, spatial map, and complex tree layout modules) are segregated into dedicated dynamic chunks, ensuring users visiting text/profile views do not download unused visualization binaries.
 
 ---
 
@@ -206,7 +206,7 @@ To preserve accessibility, responsiveness, and rendering performance, the fronte
 
 ## 8. Visualization Technology Selection Criteria
 
-Blocks **F10 through F14** will specify concrete visualization engines. Block F2 establishes the architectural evaluation criteria governing those selections:
+Blocks **F10 through F14** define visualization architecture, rendering responsibilities, evaluation constraints, accessibility requirements, and data contracts. Concrete visualization engine, library, and package selection is deferred to Stage 4 implementation. Block F2 establishes the architectural evaluation criteria governing those selections:
 
 | Evaluation Criterion | Architectural Requirement & Standard |
 | :--- | :--- |
@@ -217,12 +217,12 @@ Blocks **F10 through F14** will specify concrete visualization engines. Block F2
 | **Bundle Footprint** | Must be modular and tree-shakeable to avoid inflating client bundles. |
 | **Physics Stability** | Force simulation engines must stabilize rapidly to prevent continuous battery drain and visual jitter. |
 
-*Concrete Library Selection Status (Under Authority of Dedicated Blocks)*:
-- **F10 (Knowledge Graph)**: Deferred to Block F10 (Evaluating Cytoscape.js, D3-force, React Flow).
-- **F11 (Family Lineage DAG)**: Deferred to Block F11 (Evaluating D3-hierarchy, Dagre).
-- **F12 (Timeline Scrubber)**: Deferred to Block F12 (Evaluating SVG/Canvas timeline virtualizers).
-- **F13 (Geographic Map)**: Deferred to Block F13 (Evaluating MapLibre GL, Leaflet).
-- **F14 (Battlefield Vyuhas)**: Deferred to Block F14 (Evaluating React SVG renderers with B8 asset links).
+*Visualization Architecture & Implementation Status*:
+- **F10 (Knowledge Graph)**: Architecture defined in F10; concrete engine selection deferred to Stage 4.
+- **F11 (Family Lineage DAG)**: Architecture defined in F11; concrete layout engine selection deferred to Stage 4.
+- **F12 (Timeline Scrubber)**: Architecture defined in F12; concrete rendering engine selection deferred to Stage 4.
+- **F13 (Geographic Map)**: Architecture defined in F13; concrete mapping library selection deferred to Stage 4.
+- **F14 (Battlefield Vyuhas)**: Architecture defined in F14; concrete vector rendering selection deferred to Stage 4.
 
 ---
 
@@ -365,8 +365,8 @@ The technology stack is structured for effective AI-assisted development in Goog
 | **ADR-FE-06** | State Management | *Deferred to Block F5* | Zustand, Jotai, Redux | To be evaluated based on lens coordination, cache needs, and state complexity. | F5 | **DEFERRED** |
 | **ADR-FE-07** | API & Fetching Client | *Deferred to Block F6* | TanStack Query, SWR, Fetch | To be evaluated based on caching, ETag support, and request deduplication. | F6 | **DEFERRED** |
 | **ADR-FE-08** | Routing Engine | *Deferred to Block F7* | React Router, TanStack Router | To be evaluated based on deep-linking, type-safe URL search params, and nested layout support. | F7 | **DEFERRED** |
-| **ADR-FE-09** | Graph Viz Engine | *Deferred to Block F10* | Cytoscape.js, D3-force | To be evaluated based on force layout stability, touch gestures, and node performance. | F10 | **DEFERRED** |
-| **ADR-FE-10** | Map Viz Engine | *Deferred to Block F13* | MapLibre GL, Leaflet | To be evaluated based on vector tiles, spatial clustering, and mobile performance. | F13 | **DEFERRED** |
+| **ADR-FE-09** | Graph Viz Engine | *Architecture in F10; Engine in Stage 4* | Deferred to Stage 4 | Architecture defined in Block F10; concrete engine selection deferred to Stage 4. | F10 | **DEFERRED** |
+| **ADR-FE-10** | Map Viz Engine | *Architecture in F13; Engine in Stage 4* | Deferred to Stage 4 | Architecture defined in Block F13; concrete engine selection deferred to Stage 4. | F13 | **DEFERRED** |
 | **ADR-FE-11** | Test Framework | *Deferred to Block F17* | Vitest + RTL, Playwright | To be evaluated in the dedicated frontend testing architecture block. | F17 | **DEFERRED** |
 
 ---

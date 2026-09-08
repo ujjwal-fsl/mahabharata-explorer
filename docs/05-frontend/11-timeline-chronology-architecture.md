@@ -55,7 +55,7 @@
 
 This document establishes the frontend **architecture** for the Mahābhārata Explorer's Chronology and Timeline visualization lens (`/timeline`, `/timeline/:slug`). Chronology in epic narrative spans deep ancestral eras, foundational narrative episodes, court assemblies, wanderings and exile periods, diplomatic missions, multi-day structured sequences, and post-conflict aftermaths.
 
-Block F12 defines the visual, structural, responsive, and accessible projection of these temporal sequences. In strict accordance with the project constitution, F12 treats timeline visualization not as a conventional Gregorian calendar application, but as a **structured narrative-chronological exploration lens** governed by Zero Fabrication, Epistemic Honesty, and Accessible Equivalents: relative narrative sequence and epistemic certainty are projected without synthesizing arbitrary historical calendar dates or artificial chronological precision.
+Block F12 defines the visual, structural, responsive, and accessible projection of these temporal sequences. In strict accordance with the project constitution, F12 treats timeline visualization not as a conventional Gregorian calendar application, but as a **structured narrative-chronological exploration lens** governed by Zero Fabrication, Epistemic Honesty, and Accessible Equivalents: relative narrative sequence and epistemic status (`epistemic_status`) are projected without synthesizing arbitrary historical calendar dates or artificial chronological precision.
 
 ---
 
@@ -64,7 +64,7 @@ Block F12 defines the visual, structural, responsive, and accessible projection 
 ### 2.1 Pure Architectural Specification & Library Neutrality
 Block F12 is an architectural specification only. It defines projection models, chronological axis representations, sequence grouping rules, epistemic state rendering, responsive transformations, and accessible semantic companions. It does **not**:
 - Implement React components, hooks, or custom web elements.
-- Select or mandate concrete third-party timeline or visualization libraries (e.g., vis-timeline, TimelineJS, D3).
+- Select or mandate concrete third-party timeline, graphics, or visualization libraries.
 - Introduce application source code, package dependencies, or bundle configurations.
 - Introduce direct database queries, SQL CTEs, or backend schema changes.
 
@@ -163,7 +163,7 @@ To avoid architectural overlap and maintain system clarity across Stage 2 lenses
 | **Primary Organizing Axis** | Free spatial topology | Generational hierarchy | Temporal / Narrative sequence | Spatial coordinates (Lat/Long) | Tactical formation / War day |
 | **Core Entity Focus** | Heterogeneous network | Characters only | Events & EventParticipants | Locations & Regions | Wars, WarDays, Formations |
 | **Primary Traversal** | Radial distance ($D \le 2$) | Generational offsets | Chronological sequence indices | Spatial proximity & regions | Daily tactical progression |
-| **Canonical Route** | `/graph`, `/graph/:slug` | `/lineage`, `/lineage/:slug` | `/timeline`, `/timeline/:slug` | `/geography`, `/geography/:slug` | `/wars/:slug`, `/vyuhas/:slug` |
+| **Canonical Route** | `/graph`, `/graph/:slug` | `/lineage`, `/lineage/:slug` | `/timeline`, `/timeline/:slug` | `/geography`, `/geography/:slug` | `/wars/:war_slug`, `/vyuhas/:slug` |
 
 ---
 
@@ -182,7 +182,7 @@ Chronological attributes are consumed exactly as defined by the authoritative B2
 - `sequence_index`: Numeric ordering value for relative chronological sorting.
 - `date_value`: Textual chronological descriptor (e.g., relative era markers, narrative phases, or absolute scholarly propositions where cataloged).
 - `date_precision`: Categorical precision indicator (`exact`, `approximate`, `relative`, `unknown`).
-- `chronology_status`: Epistemic certainty classification consumed from the authoritative B2 model. While Block B2 §5.1 defines the project-wide six-state vocabulary (`known`, `unknown`, `not_researched`, `not_applicable`, `conflicting`, `approximate`), individual epistemic fields support only the semantically applicable subset established by B2. F12 consumes the field-level states actually permitted by B2 for `events.chronology_status` and does not define, expand, or alter the allowed state set.
+- `chronology_status`: Epistemic status classification (`epistemic_status`) consumed from the authoritative B2 model. While Block B2 §5.1 defines the project-wide six-state vocabulary (`known`, `unknown`, `not_researched`, `not_applicable`, `conflicting`, `approximate`), individual epistemic fields support only the semantically applicable subset established by B2. F12 consumes the field-level states actually permitted by B2 for `events.chronology_status` and does not define, expand, or alter the allowed state set.
 
 > **Architectural Invariant**: F12 does not create, rename, or invent chronological attributes. All sequence evaluations, precision states, and epistemic statuses are derived deterministically from canonical backend data.
 
@@ -399,7 +399,7 @@ Selecting an individual event card exposes its full structured context through i
 │ **Location**     │ Associated location link to Geographic Lens         │
 │                  │ (`/geography/:slug`) when canonical location exists.│
 ├──────────────────┼─────────────────────────────────────────────────────┤
-│ **Martial**      │ Associated conflict link to War Lens (`/wars/:slug`)│
+│ **Martial**      │ Associated conflict link to War Lens (`/wars/:war_slug`)│
 │                  │ when canonical war entity exists.                   │
 ├──────────────────┼─────────────────────────────────────────────────────┤
 │ **Evidence**     │ Evidence affordance invoking the Block F15 Evidence │
@@ -411,7 +411,7 @@ Selecting an individual event card exposes its full structured context through i
 
 ## 13. Chronological Uncertainty & Epistemic-State Presentation
 
-Temporal statements in ancient literature carry varying degrees of epistemic certainty. F12 embodies the project's core principle of Epistemic Honesty by strictly utilizing the six canonical B2 epistemic states:
+Temporal statements in ancient literature carry varying degrees of historical certainty. F12 embodies the project's core principle of Epistemic Honesty by strictly utilizing the six canonical B2 epistemic states (`epistemic_status`):
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -555,7 +555,7 @@ Block F12 mandates a **Dual-Mode Presentation Model**:
 ### 17.2 Boundary with Block F16 and Block F17
 - **F12 Ownership**: Defines the semantic companion model, chronological hierarchy representation, and equivalence requirements.
 - **F16 Ownership**: Authoritatively defines concrete ARIA roles (`role="feed"`, `role="article"`, `aria-current`), roving tabindex implementations, focus management, and screen-reader announcements.
-- **F17 Ownership**: Defines automated accessibility verification tests, screen-reader test scripts, and WCAG 2.1 AA quality gates.
+- **F17 Ownership**: Defines automated accessibility verification tests, screen-reader test scripts, and WCAG 2.2 Level AA quality gates.
 
 ---
 
@@ -596,7 +596,7 @@ Every event node in the timeline view includes seamless navigation bridges to ca
 - **Focus Graph**: Link to `/graph/:slug` centered on a participating character or entity when canonical entity context exists.
 - **Lineage Tree**: Selecting a character with canonical lineage context provides a navigation bridge to `/lineage/:slug`.
 - **Geographic Map**: Selecting an event location with canonical geography context opens `/geography/:slug`.
-- **War Campaign**: Selecting an event associated with a canonical war entity opens `/wars/:slug`.
+- **War Campaign**: Selecting an event associated with a canonical war entity opens `/wars/:war_slug`.
 
 ---
 
@@ -646,7 +646,7 @@ Navigation between the Timeline Lens and other exploration lenses preserves user
 - **Timeline $\leftrightarrow$ Focus Graph**: Selecting a participating character or entity provides an affordance to navigate to `/graph/:slug` when canonical entity context exists.
 - **Timeline $\leftrightarrow$ Lineage**: Selecting a character with canonical lineage context provides a navigation bridge to `/lineage/:slug`.
 - **Timeline $\leftrightarrow$ Geography**: Selecting an event location with canonical geography context opens `/geography/:slug`.
-- **Timeline $\leftrightarrow$ War**: Selecting an event associated with a canonical war entity opens `/wars/:slug`.
+- **Timeline $\leftrightarrow$ War**: Selecting an event associated with a canonical war entity opens `/wars/:war_slug`.
 
 ---
 
@@ -802,7 +802,7 @@ F12 defines conceptual rendering tiers and architectural invariants only. Fixed 
 - [x] Density management, progressive disclosure, and event clustering specified conceptually.
 - [x] Focal-character chronology (`/timeline/:slug`) architected to contextualize individual milestones within macro-narrative.
 - [x] Event detail inspection model defined exposing participants, locations, and evidence affordances.
-- [x] Epistemic certainty states strictly match the six canonical B2 states with non-color indicators per Block F3.
+- [x] Epistemic status states (`epistemic_status`) strictly match the six canonical B2 states with non-color indicators per Block F3.
 - [x] Competing chronological traditions visualized via parallel tracks without arbitrary harmonization.
 - [x] Timeline filtering architecture defined conceptually without data mutation.
 - [x] Responsive recomposition mapped across the four Block F4 viewport classes.

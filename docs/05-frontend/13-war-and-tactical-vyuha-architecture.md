@@ -3,7 +3,7 @@
 ## 1. Document Status & Purpose
 
 - **Document Identifier**: Block F14
-- **Status**: Draft Architectural Specification (Review Pending)
+- **Status**: Approved Architectural Specification
 - **Stage**: Stage 2 — Frontend Architecture
 - **Location**: `docs/05-frontend/13-war-and-tactical-vyuha-architecture.md`
 - **Upstream Dependencies**:
@@ -67,9 +67,9 @@ In strict compliance with the project constitution, F14 projects canonical marti
 ## 2. Architectural Context & Foundational Principles
 
 ### 2.1 Pure Architectural Specification & Library Neutrality
-Block F14 is an architectural specification only. It defines structural projection models, daily battle sequence navigation, tactical fidelity tiers, epistemic certainty visual semantics, responsive recompositions, and accessible semantic companions. It does **not**:
+Block F14 is an architectural specification only. It defines structural projection models, daily battle sequence navigation, tactical fidelity tiers, epistemic status visual semantics (`epistemic_status`), responsive recompositions, and accessible semantic companions. It does **not**:
 - Implement React components, canvas renderers, or UI view models.
-- Select, mandate, or bundle concrete client-side graphics libraries (e.g., SVG canvas toolkits, WebGL engines, PixiJS, Konva, or D3).
+- Select, mandate, or bundle concrete client-side graphics libraries or rendering engines.
 - Introduce application source code, package dependencies, or CSS stylesheets.
 - Introduce direct database queries, schema migrations, or backend API modifications.
 
@@ -133,7 +133,7 @@ Tactical battle diagrams and formation layouts pose insurmountable barriers to s
 
 ### 3.2 Out-of-Scope (Strict Non-Goals)
 1. **No Application Source Code**: No React components, JSX/TSX files, CSS modules, or client runtime scripts.
-2. **No Concrete Mapping / Graphics Library Selection**: No selection, installation, or hard dependency on D3, PixiJS, Three.js, Fabric.js, Konva, or SVG frameworks.
+2. **No Concrete Mapping / Graphics Library Selection**: No selection, installation, or hard dependency on specific graphics or canvas rendering libraries or SVG frameworks.
 3. **No General Graph Engine Duplication**: F14 does not build a general topological network graph; general relationship visualization belongs strictly to Block F10.
 4. **No Kinship DAG Duplication**: F14 does not build ancestral or genealogical trees; family trees belong strictly to Block F11.
 5. **No Chronology Redefinition**: F14 consumes chronological sequence indexes (`sequence_index`) defined by Block B2 and organized by Block F12; it does not define timeline sequencing logic.
@@ -348,7 +348,7 @@ A *Vyūha* is an ancient military array or strategic battlefield formation chron
 │ 1. FORMATION IDENTITY & EPITHETS                                       │
 │    - Canonical Name (e.g., "Chakravyuha" / "Padmavyuha")              │
 │    - Sanskrit designation and alternate transliterations               │
-│    - Associated War & War Day where recorded (`/wars/:slug/day/:day`)  │
+│    - Associated War & War Day where recorded (`/wars/:war_slug/day/:day`)│
 ├────────────────────────────────────────────────────────────────────────┤
 │ 2. TACTICAL DESCRIPTION & CONTEXT                                      │
 │    - Curated summary and detailed description (Block B2 §4.9)          │
@@ -556,7 +556,7 @@ Tactical diagrams, formation schematics, and daily battle sequences must be full
 ### 12.2 Architectural Demarcation with Blocks F16 and F17
 - **Block F14 Ownership**: Defines the structural hierarchy, semantic elements, text alternatives, and data parity requirements for war and formation exploration.
 - **Block F16 Ownership**: Authoritatively defines concrete ARIA roles, landmark regions, keyboard shortcut sequences, live-region screen-reader announcements, and focus management.
-- **Block F17 Ownership**: Defines automated accessibility verification test suites, screen-reader user testing protocols, and WCAG 2.1 AA compliance validation.
+- **Block F17 Ownership**: Defines automated accessibility verification test suites, screen-reader user testing protocols, and WCAG 2.2 Level AA conformance validation.
 
 ---
 
@@ -565,7 +565,7 @@ Tactical diagrams, formation schematics, and daily battle sequences must be full
 Every war record, war day summary, formation description, and combat outcome connects to authoritative textual sources and scholarly claims:
 - Where canonical evidence/provenance is available, F14 exposes a standard evidence affordance (`[Evidence ↗]`).
 - Activating the affordance invokes the canonical **Block F15 Evidence Drawer**, passing the relevant `claim_id` or entity slug.
-- The drawer presents the primary Sanskrit text locators (Parva, Adhyaya, Shloka), critical edition references (e.g., BORI Critical Edition), translation excerpts, and scholarly assessments.
+- The drawer presents primary Sanskrit text locators (Parva, Adhyaya, Shloka), canonical source references and evidence locators, translation excerpts where supplied, and contextual assessment commentary (`evidence.assessment`).
 - **Boundary Invariant**: F14 defines the invocation trigger and contextual payload; Block F15 authoritatively governs citation display, manuscript drawer layouts, and excerpt rendering.
 
 ---
@@ -838,7 +838,7 @@ The War & Tactical Lens encompasses dense participant rosters, multi-event comba
 - [x] War-day exploration architecture defined with daily titles, commanders, combat events, and participant rosters.
 - [x] Vyuha / Formation architecture specified with three-tier fidelity model (Descriptive, Structural Schematic, Authoritative Geometric).
 - [x] Explicit requirement that formation names alone must never be converted into synthetic geometric shapes.
-- [x] Epistemic certainty representation adheres strictly to canonical B2 six-state vocabulary (`known`, `unknown`, `not_researched`, `not_applicable`, `conflicting`, `approximate`).
+- [x] Epistemic status representation adheres strictly to canonical B2 six-state vocabulary (`epistemic_status`: `known`, `unknown`, `not_researched`, `not_applicable`, `conflicting`, `approximate`).
 - [x] Responsive recomposition mapped across the four Block F4 viewport classes without arbitrary dimensions.
 - [x] Dual-mode accessibility model architected with structural semantic companion and explicit demarcation against F16 and F17.
 - [x] Canonical routes `/wars`, `/wars/:war_slug`, `/wars/:war_slug/day/:day`, `/vyuhas`, `/vyuhas/:slug` preserved; query serialization strictly under F7 authority.

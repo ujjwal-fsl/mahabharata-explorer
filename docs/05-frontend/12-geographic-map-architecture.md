@@ -3,7 +3,7 @@
 ## 1. Document Status & Purpose
 
 - **Document Identifier**: Block F13
-- **Status**: Draft Architectural Specification (Review Pending)
+- **Status**: Approved Architectural Specification
 - **Stage**: Stage 2 — Frontend Architecture
 - **Location**: `docs/05-frontend/12-geographic-map-architecture.md`
 - **Upstream Dependencies**:
@@ -67,7 +67,7 @@ Block F13 defines the visual, structural, responsive, and accessible projection 
 ### 2.1 Pure Architectural Specification & Library Neutrality
 Block F13 is an architectural specification only. It defines spatial projection models, coordinate handling, certainty visual semantics, unmapped-entity discovery, multi-scale clustering concepts, responsive transformations, and accessible semantic companions. It does **not**:
 - Implement React components, custom hooks, or web mapping components.
-- Select, mandate, or bundle concrete client-side mapping libraries (e.g., MapLibre GL, Leaflet, OpenLayers, Google Maps, or D3-geo).
+- Select, mandate, or bundle concrete client-side mapping libraries or rendering engines.
 - Introduce application source code, package dependencies, or map tile server configurations.
 - Introduce direct database queries, spatial SQL, or PostGIS schema alterations.
 
@@ -164,7 +164,7 @@ To prevent architectural overlap and maintain system clarity across Stage 2 lens
 | **Primary Organizing Axis** | Free spatial topology | Generational hierarchy | Temporal / Narrative sequence | Spatial coordinates (Lat/Long) | Tactical formation / War day |
 | **Core Entity Focus** | Heterogeneous network | Characters only | Events & EventParticipants | Locations & Regions | Wars, WarDays, Formations |
 | **Primary Traversal** | Radial distance ($D \le 2$) | Generational offsets | Chronological sequence indices | Spatial proximity & regions | Daily tactical progression |
-| **Canonical Route** | `/graph`, `/graph/:slug` | `/lineage`, `/lineage/:slug` | `/timeline`, `/timeline/:slug` | `/geography`, `/geography/:slug` | `/wars/:slug`, `/vyuhas/:slug` |
+| **Canonical Route** | `/graph`, `/graph/:slug` | `/lineage`, `/lineage/:slug` | `/timeline`, `/timeline/:slug` | `/geography`, `/geography/:slug` | `/wars/:war_slug`, `/vyuhas/:slug` |
 
 ---
 
@@ -384,7 +384,7 @@ Selecting an individual location card or map marker exposes its complete structu
 │                  │ entity routes, e.g., `/characters/:slug`).          │
 ├──────────────────┼─────────────────────────────────────────────────────┤
 │ **Martial**      │ Associated war campaigns or battles if battlefield  │
-│                  │ (with bridge to War Lens `/wars/:slug`).            │
+│                  │ (with bridge to War Lens `/wars/:war_slug`).        │
 ├──────────────────┼─────────────────────────────────────────────────────┤
 │ **Evidence**     │ Evidence affordance invoking the Block F15 Evidence │
 │                  │ Drawer for backing scholarly claims and sources.    │
@@ -546,7 +546,7 @@ Interactive web maps present significant accessibility barriers. Block F13 manda
 ### 16.2 Boundary with Block F16 and Block F17
 - **F13 Ownership**: Defines the dual-mode structure, semantic equivalence requirements, and geographic data hierarchy.
 - **F16 Ownership**: Authoritatively defines concrete ARIA attributes, landmark regions, keyboard shortcut bindings, focus rings, and screen-reader announcements.
-- **F17 Ownership**: Defines automated accessibility verification tests, screen-reader test scripts, and WCAG 2.1 AA quality gates.
+- **F17 Ownership**: Defines automated accessibility verification tests, screen-reader test scripts, and WCAG 2.2 Level AA quality gates.
 
 ---
 
@@ -584,7 +584,7 @@ Every location node in the geographic view includes seamless navigation bridges 
 - **Character Profile**: Link to associated figures at `/characters/:slug`.
 - **Focus Graph**: Link to `/graph/:slug` centered on a location entity when canonical entity context exists.
 - **Timeline**: Link to `/timeline` filtered by events that occurred at this location.
-- **War Campaign**: Link to `/wars/:slug` when the location is a battlefield or war theater.
+- **War Campaign**: Link to `/wars/:war_slug` when the location is a battlefield or war theater.
 
 ---
 
@@ -629,7 +629,7 @@ Navigation between the Geographic Lens and other exploration lenses preserves us
 - **Geography $\leftrightarrow$ Character**: Selecting an associated figure opens `/characters/:slug`. Navigating from a character profile opens `/geography` presenting the canonical geographic context associated with that character.
 - **Geography $\leftrightarrow$ Focus Graph**: Selecting a location entity provides an affordance to navigate to `/graph/:slug` when canonical entity context exists.
 - **Geography $\leftrightarrow$ Timeline**: Selecting a location's event roster bridges to `/timeline` filtered by events situated at that site.
-- **Geography $\leftrightarrow$ War**: Selecting a battlefield location associated with a canonical war entity opens `/wars/:slug`.
+- **Geography $\leftrightarrow$ War**: Selecting a battlefield location associated with a canonical war entity opens `/wars/:war_slug`.
 
 ---
 

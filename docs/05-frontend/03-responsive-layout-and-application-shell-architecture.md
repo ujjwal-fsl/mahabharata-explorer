@@ -48,7 +48,8 @@ The application shell provides the durable structural frame within which all exp
 │    - Contextual Node / Entity Inspector Panels                         │
 ├────────────────────────────────────────────────────────────────────────┤
 │ 4. PRIMARY APPLICATION FRAME (z-index: base)                           │
-│    ├── Persistent Header Bar (Brand, Search trigger, Lens tabs, Theme) │
+│    ├── Persistent Header Bar (Brand, Search trigger, Lens controls,    │
+│    │   Theme)                                                          │
 │    ├── Navigation Rail / Sidebar (Lens switcher on expanded layouts)   │
 │    └── Content / Workspace Region (Active exploration lens / canvas)   │
 └────────────────────────────────────────────────────────────────────────┘
@@ -200,8 +201,8 @@ Responsive behavior must account for screen orientation and vertical constraints
 │ Viewport State   │ Architectural Adaptation                            │
 ├──────────────────┼─────────────────────────────────────────────────────┤
 │ **Portrait       │ Vertical reading flow: Entity summary at top,       │
-│ Flow**           │ expandable relationship tabs below, bottom-anchored │
-│                  │ lens navigation, full-height modal overlays.        │
+│ Flow**           │ expandable relationship sections below,             │
+│                  │ bottom-anchored lens navigation, full-height modals.│
 ├──────────────────┼─────────────────────────────────────────────────────┤
 │ **Landscape      │ Horizontal workspace flow: Minimalist top header,   │
 │ Flow**           │ collapsed left-side icon rail, side-by-side         │
@@ -336,8 +337,8 @@ Block F4 establishes the structural foundation for application accessibility:
 ### 12.1 Focus & Keyboard Navigation Flow
 1. **Skip Mechanisms**: Prominent "Skip to Main Content" link appears on initial `Tab` keypress, bypassing navigation bars.
 2. **Logical Focus Order**: Focus order strictly follows the logical semantic and interaction flow of the active composition rather than purely arbitrary visual coordinates.
-3. **Modal & Drawer Focus Trapping**: When an overlay modal or slide-over drawer opens, keyboard focus moves to the first focusable element inside the panel; `Escape` key immediately closes the surface and restores focus to the invoking trigger.
-*(Note: Detailed accessibility architecture is specified in Block **F16**; empirical accessibility verification is owned by Block **F17**).*
+3. **Modal Focus Containment & Surface Management**: When a modal overlay or modal dialog opens, keyboard focus moves inside the panel and focus containment is enforced; the `Escape` key immediately closes the surface and restores focus to the invoking trigger. Non-modal contextual surfaces (such as docked drawers or slide-overs on expanded layouts) support `Escape` closure and logical focus navigation without enforcing modal focus trapping.
+*(Note: Detailed accessibility architecture, surface roles, and focus rules are authoritatively specified in Block **F16**; empirical accessibility verification is owned by Block **F17**).*
 
 ---
 

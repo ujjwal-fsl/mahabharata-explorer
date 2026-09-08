@@ -3,7 +3,7 @@
 ## 1. Document Status & Purpose
 
 - **Document Identifier**: Block F11
-- **Status**: Draft Architectural Specification (Targeted Correction Pass)
+- **Status**: Approved Architectural Specification
 - **Stage**: Stage 2 — Frontend Architecture
 - **Location**: `docs/05-frontend/10-lineage-family-tree-architecture.md`
 - **Upstream Dependencies**:
@@ -102,7 +102,7 @@ Genealogical trees are complex visual diagrams. Users who cannot perceive visual
 - Parentage semantics: biological, social, divine, single-parent lineages, and half-sibling branches as supplied by backend claims.
 - Generational depth conceptual controls and branch expansion/collapse.
 - Disconnected lineages, multi-root dynastic overviews, and fragmented ancestral segments.
-- Epistemic certainty rendering across all six canonical B2 states (`known`, `unknown`, `not_researched`, `not_applicable`, `conflicting`, `approximate`).
+- Epistemic status rendering across all six canonical B2 states (`epistemic_status`: `known`, `unknown`, `not_researched`, `not_applicable`, `conflicting`, `approximate`).
 - Lineage-specific filtering: generational depth, union visibility toggles, and direct-line emphasis.
 - Responsive adaptation across the four Block F4 viewport classes (Compact, Medium, Expanded, Wide).
 - Dual-mode accessibility model: visual generational DAG and semantic companion navigator.
@@ -447,7 +447,7 @@ Block F11 mandates a **Dual-Mode Presentation Model**:
 ### 15.2 Boundary with Block F16 and Block F17
 - **F11 Ownership**: Defines the semantic companion model, generational hierarchy representation, and equivalence requirements.
 - **F16 Ownership**: Authoritatively defines concrete ARIA roles (`role="tree"`, `role="treeitem"`, `aria-expanded`), roving tabindex implementations, focus traps, and screen-reader announcements.
-- **F17 Ownership**: Defines automated accessibility verification tests, screen-reader test scripts, and WCAG 2.1 AA quality gates.
+- **F17 Ownership**: Defines automated accessibility verification tests, screen-reader test scripts, and WCAG 2.2 Level AA quality gates.
 
 ---
 
@@ -688,7 +688,7 @@ State management strictly follows the hierarchy established in Block F5:
 - [x] Parent, child, and sibling semantics specified with zero synthetic "Unknown" dummy entities.
 - [x] Generational exploration model defined along generational axis and distinguished from F10's $D \le 2$ limit.
 - [x] Lineage overview and disconnected lineage handling specified generically without hard-coded lists.
-- [x] Epistemic certainty states strictly match the six canonical B2 states with non-color indicators per Block F3.
+- [x] Epistemic status states (`epistemic_status`) strictly match the six canonical B2 states with non-color indicators per Block F3.
 - [x] Conflicting parentage accounts visualized with distinct claim triggers to Block F15.
 - [x] Lineage filtering architecture defined conceptually without data mutation.
 - [x] Responsive recomposition mapped across the four Block F4 viewport classes.

@@ -125,7 +125,7 @@ The frontend does not build isolated applications for different topics. Instead,
       └──────────────┴───────────────┼───────────────┴──────────────┘
                                      ▼
                         EVIDENCE & CITATION DRAWER
-                       (BORI CE Locators & Verses)
+                        (Citation Locators & Evidence)
 ```
 
 ---
@@ -138,15 +138,15 @@ The frontend architecture organizes user exploration into 10 primary lenses.
 > The path patterns listed below (e.g., `/characters/:slug`) are **illustrative conceptual examples only**. Final route syntax, route hierarchies, URL parameter contracts, and navigation semantics are formally specified in Block **F7 (Routing & Deep-Link Architecture)**.
 
 1. **Character Explorer (e.g., `/characters/:slug`)**: Biographical summaries, aliases/epithets, role tags, and curated portraits (with semantic monogram fallbacks).
-2. **Family Lineage Explorer (e.g., `/characters/:slug/family`)**: Interactive multi-generational parent-child DAGs, sibling groups, and spousal links.
-3. **General Relationship Explorer (e.g., `/relationships`)**: Typed non-familial network discovery (alliances, rivalries, mentorships).
-4. **Timeline & Chronology Explorer (e.g., `/timeline`, `/events/:slug`)**: Chronological sequence ordering (`sequence_index`), Parva subdivisions (1–18), and milestone Level-of-Detail (LOD) zoom.
-5. **Geographic Map Explorer (e.g., `/map`, `/locations/:slug`)**: Interactive viewport map with bounding box queries, mapped pins, and unmapped site indicators.
-6. **Dynasties & Factions Explorer (e.g., `/groups/:slug`)**: Dynastic trees (Kuru, Yadava, Panchala) and factional war allegiances.
-7. **War Explorer (e.g., `/wars/:slug`, `/wars/:slug/days/:day`)**: Partitioned day-by-day battlefield narratives, commanders, fallen heroes, and tactical occurrences.
-8. **Battlefield Vyuhas Explorer (e.g., `/formations/:slug`)**: Tactical formation descriptions, SVG diagrams, event links, and accessibility text.
+2. **Family Lineage Explorer (e.g., `/lineage/:slug`)**: Interactive multi-generational parent-child DAGs, sibling groups, and spousal links.
+3. **General Relationship Explorer (e.g., `/relationships`, `/relationships/:slug`)**: Typed non-familial network discovery (alliances, rivalries, mentorships).
+4. **Timeline & Chronology Explorer (e.g., `/timeline`, `/timeline/:slug`)**: Chronological sequence ordering (`sequence_index`), Parva subdivisions (1–18), and milestone Level-of-Detail (LOD) zoom.
+5. **Geographic Map Explorer (e.g., `/geography`, `/geography/:slug`)**: Interactive viewport map with bounding box queries, mapped pins, and unmapped site indicators.
+6. **Dynasties & Factions Explorer (e.g., `/factions`, `/factions/:slug`)**: Dynastic trees (Kuru, Yadava, Panchala) and factional war allegiances.
+7. **War Explorer (e.g., `/wars`, `/wars/:war_slug`, `/wars/:war_slug/day/:day`)**: Partitioned day-by-day battlefield narratives, commanders, fallen heroes, and tactical occurrences.
+8. **Battlefield Vyuhas Explorer (e.g., `/vyuhas`, `/vyuhas/:slug`)**: Tactical formation descriptions, SVG diagrams, event links, and accessibility text.
 9. **Global Search & Autocomplete (e.g., `/search`, header overlay)**: Instant dual-tier fuzzy/FTS search, transliteration matching, and type filtering.
-10. **Global Focus Graph (e.g., `/graph/focus/:type/:slug`)**: Ego-centric interactive network graphs bounded to depth $D=1$ ($\le 50$ nodes) and $D=2$ ($\le 100$ nodes).
+10. **Global Focus Graph (e.g., `/graph`, `/graph/:slug`)**: Ego-centric interactive network graphs respecting the canonical graph Focus contract and bounded depth $D \le 2$.
 
 ---
 
@@ -169,7 +169,8 @@ The frontend state architecture separates data into distinct, predictable lifecy
 │ 4. UI State      │ Transient modal visibility, drawer open/close,      │
 │                  │ hover tooltips, and temporary dropdown states.      │
 │ 5. Client Prefs  │ Local-only accessibility settings (theme, reduced   │
-│                  │ motion, text size) stored in localStorage.          │
+│                  │ motion, text size) persisting across sessions;      │
+│                  │ concrete persistence mechanism deferred to Stage 4. │
 └──────────────────┴─────────────────────────────────────────────────────┘
 ```
 
@@ -245,7 +246,7 @@ Accessibility is an architectural requirement embedded across all frontend block
 1. **Semantic HTML5 & WAI-ARIA**: Proper landmark roles (`<nav>`, `<main>`, `<aside>`), ARIA live regions for dynamic search/filter updates, and explicit ARIA labels on all graphical nodes.
 2. **Keyboard Navigation & Focus Management**: 100% of interactive features (graph navigation, map panning, timeline scrubbing, evidence drawers) must be operable via keyboard (`Tab`, `Enter`, `Escape`, Arrow keys).
 3. **Non-Visual Representation**: Complex visual diagrams (maps, family trees, vyuhas) must provide equivalent structured text tables or list alternatives.
-4. **Visual Contrast & Reduced Motion**: WCAG 2.1 AA compliance (contrast ratio $\ge 4.5:1$ for normal text); respect for user's `prefers-reduced-motion` preferences by disabling canvas physics and animated transitions.
+4. **Visual Contrast & Reduced Motion**: WCAG 2.2 Level AA conformance baseline (contrast ratio $\ge 4.5:1$ for normal text); respect for user's `prefers-reduced-motion` preferences by disabling canvas physics and animated transitions.
 
 ---
 
@@ -274,7 +275,7 @@ To deliver an instantaneous exploration experience and operate strictly within b
 | :--- | :--- |
 | **Epistemic Honesty** | Preserves variant claims, unmapped coordinates, and explicit unknown states without data fabrication. |
 | **Responsiveness** | Responsive layout reflow across Mobile, Tablet, Laptop, and Desktop. |
-| **Accessibility** | WCAG 2.1 AA compliance, full keyboard navigability, and screen reader semantic alternatives. |
+| **Accessibility** | WCAG 2.2 Level AA conformance baseline, full keyboard navigability, and screen reader semantic alternatives. |
 | **Performance** | Smooth rendering and interaction, virtualized scrolling, and adherence to B9 payload/latency budgets (formal frontend performance budgets to be specified in Block F17). |
 | **Deep-Linkability**| Stateless canonical URL routing for all entities, lenses, filters, and Focus subgraphs. |
 | **Visual Elegance** | Modern, minimalist flat design with restrained Sanātana aesthetic; zero faux-parchment noise. |
@@ -345,25 +346,25 @@ Requirements in Stage 2 follow a standardized, traceable categorization taxonomy
 - **`REQ-FE-LNS-xx`**: Exploration lens-specific capabilities (Characters, Wars, Formations, Lineage).
 - **`REQ-FE-VIS-xx`**: Interactive graphical engines (Knowledge Graph, Lineage DAG, Map, Timeline).
 - **`REQ-FE-EVD-xx`**: Evidence drawer, citation locator rendering, and conflicting tradition toggles.
-- **`REQ-FE-ACC-xx`**: WCAG 2.1 AA compliance, keyboard navigation, and screen reader semantics.
+- **`REQ-FE-ACC-xx`**: WCAG 2.2 Level AA conformance, keyboard navigation, and screen reader semantics.
 - **`REQ-FE-PRF-xx`**: Client-side rendering performance, virtualization, and frame-rate budgets.
 - **`REQ-FE-TST-xx`**: Frontend testing architecture, component testing, and visual regression.
 
 ---
 
-## 21. Explicitly Deferred Frontend Decisions
+## 21. Technology Decisions & Deferred Implementation Boundaries
 
-To maintain architectural discipline, the following concrete implementation choices are intentionally deferred to subsequent Stage 2 blocks or Stage 4:
+To maintain architectural discipline, foundational architectural selections established in Stage 2 are distinguished from concrete package-level implementation choices deferred to Stage 4:
 
-1. **Frontend Framework & Version** (e.g., React 19 vs. Vue 3 vs. Svelte 5) $\rightarrow$ *Deferred to Block F2*.
-2. **Build Tool & Bundler** (e.g., Vite vs. Next.js vs. Astro) $\rightarrow$ *Deferred to Block F2*.
-3. **Component Styling Architecture** (e.g., Tailwind CSS vs. CSS Modules vs. Vanilla Extract) $\rightarrow$ *Deferred to Block F3*.
-4. **Specific State Management Library** (e.g., Zustand vs. Jotai vs. Redux Toolkit) $\rightarrow$ *Deferred to Block F5*.
-5. **Data Fetching / Server-State Library** (e.g., TanStack Query vs. SWR) $\rightarrow$ *Deferred to Block F6*.
-6. **Graph Visualization Engine** (e.g., Cytoscape.js vs. D3-force vs. React Flow) $\rightarrow$ *Deferred to Block F10*.
-7. **Tree Layout Algorithm / Library** (e.g., D3-hierarchy vs. Dagre) $\rightarrow$ *Deferred to Block F11*.
-8. **Map Rendering Engine** (e.g., MapLibre GL vs. Leaflet vs. OpenLayers) $\rightarrow$ *Deferred to Block F13*.
-9. **Frontend Test Framework** (e.g., Vitest + Testing Library vs. Playwright) $\rightarrow$ *Deferred to Block F17*.
+1. **Frontend Framework & Language Baseline**: Established in Block F2 as **React 19+** with **TypeScript 5 (strict mode)**.
+2. **Build Toolchain & Module Architecture**: Established in Block F2 as **Vite 6+** with native ESM and route-based dynamic code-splitting.
+3. **Design System & Styling Architecture**: Established in Block F3 as **Tailwind CSS v4** coupled with semantic CSS custom properties and design tokens.
+4. **Client State Management Library**: Architecture defined in Block F5; concrete store/state-management package selection is *deferred to Stage 4*.
+5. **Data Fetching & Server-State Client**: Architecture defined in Block F6; concrete client/server-state fetching package selection is *deferred to Stage 4*.
+6. **Graph Visualization Engine**: Architecture defined in Block F10; concrete rendering-engine/package selection is *deferred to Stage 4*.
+7. **Lineage & Tree Layout Engine**: Architecture defined in Block F11; concrete rendering-engine/package selection is *deferred to Stage 4*.
+8. **Geographic Map Rendering Engine**: Architecture defined in Block F13; concrete rendering-engine/package selection is *deferred to Stage 4*.
+9. **Frontend Test Framework & Test Runner**: Architecture defined in Block F17; concrete testing test-runner/tooling package selection is *deferred to Stage 4*.
 
 ---
 

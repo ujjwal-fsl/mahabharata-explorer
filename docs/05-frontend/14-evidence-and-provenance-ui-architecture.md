@@ -28,7 +28,7 @@
 │                  │ - Stage 2 Block F17: Performance & Testing          │
 │                  │ - Stage 4: Implementation Phase                     │
 ├──────────────────┼─────────────────────────────────────────────────────┤
-│ Status           │ Draft Architectural Specification (Review Pending) │
+│ Status           │ Approved Architectural Specification                │
 └──────────────────┴─────────────────────────────────────────────────────┘
 ```
 
@@ -50,7 +50,7 @@ This architectural specification defines how the canonical four-tier provenance 
 In accordance with the project constitution (`AGENTS.md`) and Stage 1 Block B4:
 
 1. **Zero Fabrication**:
-   - The UI must never invent claims, supporting evidence, author names, editions, quotations, page numbers, shloka locators, or confidence ratings.
+   - The UI must never invent claims, supporting evidence, author names, editions, quotations, page numbers, shloka locators, or certainty ratings.
    - Absence of evidence must be presented honestly and distinctly from lack of research or textual silence. Missing citations must never be populated with placeholder or synthetic academic data.
 2. **Block B4 is the Authoritative Source of Truth**:
    - Block F15 provides the **presentation architecture** for the canonical provenance model established in Block B4.
@@ -441,14 +441,14 @@ In strict accordance with Rule 03 and B4 §6, **competing traditions and variant
 │ Translation:                      │ Translation:                       │
 │ [Translation A where supplied]    │ [Translation B where supplied]     │
 ├───────────────────────────────────┴────────────────────────────────────┤
-│ SCHOLARLY ASSESSMENT / APPARATUS CRITICUS                              │
+│ ASSESSMENT & CONTEXTUAL COMMENTARY (`evidence.assessment`)             │
 │ Curated editorial note detailing textual variations and context        │
 │ where supplied by canonical data (from `evidence.assessment`).         │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### 10.1 Multi-Claim Non-Biased Presentation Rules
-1. **Equal Structural Weight**: Competing claims are displayed in side-by-side comparative containers on Expanded/Wide viewports and sequentially linked comparative cards on Compact viewports. Neither variant is hidden behind an "alternative" sub-menu.
+1. **Non-Hierarchical Presentation**: Competing claims are presented non-hierarchically and non-dismissively without silent privileging of one variant over another. Concrete responsive layout (such as comparative side-by-side containers or linked comparative cards across viewports) is left to Stage 4 implementation. Neither variant is hidden behind an "alternative" sub-menu.
 2. **Neutral Ordering**: Display ordering adheres to canonical backend delivery or source publication date; the UI never labels one variant as the "true" version and another as "false".
 3. **No Averaged Values**: Where claims disagree on dates, durations, or genealogical links, the UI must never average them into synthetic values (e.g., claiming an exile lasted "12.5 years" if sources say 12 and 13).
 4. **Epistemic Labeling**: Both claims carry the canonical `epistemic_status = 'conflicting'`.
@@ -677,12 +677,12 @@ Provenance inspection acts as a connective tissue across the entire Mahābhārat
 
 ### ADR-F15-02: Strict Separation of Claim, Evidence, and Source
 - **Context**: Many applications collapse citations into a single flat string (e.g., `"[Source Locator]"`).
-- **Decision**: Preserve Block B4's distinct three-layer structure in the UI: Claims represent what is asserted, Evidence represents why it is believed (with excerpts and locators), and Sources represent where it originates (the authoritative edition).
+- **Decision**: Preserve Block B4's distinct three-layer structure in the UI: Claims represent what is asserted, Evidence represents why it is believed (with excerpts, locators, and assessments), and Sources represent where it originates (the bibliographic source record).
 - **Consequences**: Enables multi-source corroboration, variant tradition comparisons, and transparent scholarly evaluation.
 
-### ADR-F15-03: Multi-Claim Side-by-Side Conflict Parity
+### ADR-F15-03: Multi-Claim Non-Hierarchical Conflict Parity
 - **Context**: Conflicting accounts across variant traditions or recensions risk being presented hierarchically, implying that one reading is canonical and the other is erroneous.
-- **Decision**: Mandate equal visual weight, comparative side-by-side presentation, and neutral chronological/source-based ordering for all competing claims.
+- **Decision**: Mandate non-hierarchical, non-dismissive presentation and neutral chronological/source-based ordering for all competing claims without silent privileging.
 - **Consequences**: Directly upholds Constitutional Rule 03 (Preservation of Conflicting Traditions) and prevents synthetic editorial bias.
 
 ### ADR-F15-04: Non-Mutation of Native Citation Locators

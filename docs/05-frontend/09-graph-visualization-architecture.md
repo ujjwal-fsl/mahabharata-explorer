@@ -58,7 +58,7 @@ This document defines the complete frontend **architecture** for the Mahābhāra
 ### 2.1 Pure Architectural Specification & Library Neutrality
 Block F10 is an architectural specification only. It defines projection models, node/edge semantic mappings, interaction lifecycles, viewport responsiveness, accessible fallbacks, and rendering boundaries. It does **not**:
 - Implement React components, hooks, or custom web components.
-- Introduce concrete third-party graph libraries (e.g., Cytoscape, D3-force, Sigma.js, Force-Graph, Vis.js, G6).
+- Introduce concrete third-party graph rendering libraries or packages.
 - Create application source code, package manifests, or bundle configurations.
 - Introduce direct database queries, SQL CTEs, or backend schema mutations.
 
@@ -123,7 +123,7 @@ The Graph Lens serves as the primary topological exploration vehicle within the 
 │  dynastic boundaries?"            │ teachers spanning both sides.      │
 ├───────────────────────────────────┼────────────────────────────────────┤
 │ "Is this connection settled or    │ Direct visual inspection of        │
-│  contested in the tradition?"     │ epistemic certainty on the edge.   │
+│  contested in the tradition?"     │ epistemic status/certainty on edge │
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
@@ -281,7 +281,7 @@ Every rendered node is composed of four standardized visual zones:
 2. **Label Zone**:
    - Primary line: Canonical entity name formatted with appropriate typographic diacritics (e.g., *Arjuna*, *Karṇa*).
    - Secondary line (when space/zoom permits): Primary alias, patronymic, or dynastic role (e.g., *Pārtha*, *Sūtaputra*).
-3. **Epistemic Badge Zone**: Non-color indicator displaying textual certainty if the entity itself carries contested status (Block F3 §5).
+3. **Epistemic Badge Zone**: Non-color indicator displaying epistemic status (`epistemic_status`) or certainty if the entity itself carries contested or approximate status (Block F3 §5).
 4. **Degree Indicator Zone**: Subtly indicates connected neighbor count, providing progressive disclosure of connection density.
 
 ### 8.3 Node State Semantics
@@ -409,7 +409,7 @@ Dense visual canvases often present significant accessibility barriers for keybo
 Graph filtering enables users to reduce visual complexity by selectively revealing or hiding graph elements. Filtering operates across structured dimensions derived from canonical Stage 1 data:
 - **Entity Domain**: Filtering by canonical entity types (`Character`, `Group`, `Location`, `Event`).
 - **Relationship Category**: Filtering by relationship groupings derived from canonical B2/B3 types (such as kinship, alliance, mentorship, rivalry, and martial connections).
-- **Epistemic Certainty**: Filtering by canonical certainty levels (e.g., settled consensus vs. conflicting accounts).
+- **Epistemic Status & Certainty**: Filtering by canonical epistemic states (`epistemic_status`: `known`, `conflicting`, etc.) or canonical claim certainty levels (`certainty`: `established`, `disputed`, etc.).
 - **Exploration Depth**: Restricting visualization to immediate neighbors ($D=1$) or extended network ($D=2$).
 
 ### 13.2 Visual Hiding vs. Layout Exclusion vs. Data Mutation
@@ -859,7 +859,7 @@ State governance strictly complies with the five-layer state model defined in Bl
 - [x] Density management, collision prevention, and adaptive label disclosure established.
 - [x] Dual-mode accessibility model (Spatial traversal + Accessible Companion representation) architected with F16/F17 demarcation.
 - [x] Multi-modal interaction (mouse, touch hit targets, keyboard) fully addressed without arbitrary numeric thresholds.
-- [x] Epistemic certainty states mapped to non-color differentiated visual tokens per Block F3.
+- [x] Epistemic status states (`epistemic_status`) mapped to non-color differentiated visual tokens per Block F3.
 - [x] Evidence trigger boundaries established with Block F15 Evidence Drawer.
 - [x] Route grammar and query parameter synchronization strictly aligned with Block F7.
 - [x] Responsive recomposition mapped across the four Block F4 viewport classes.

@@ -46,8 +46,8 @@ The design system is governed by 15 foundational principles tailored to a schola
 │    not researched, not applicable, conflicting, and approximate claims.│
 │ 6. EVIDENCE-AWARE UI: Citations, primary sources, and verse locators   │
 │    have first-class visual affordances rather than hidden footnotes.   │
-│ 7. ACCESSIBLE BY DEFAULT: WCAG 2.1 AA contrast, visible focus rings,   │
-│    and non-color-only encoding of all critical states.                 │
+│ 7. ACCESSIBLE BY DEFAULT: WCAG 2.2 Level AA contrast, visible focus    │
+│    rings, and non-color-only encoding of all critical states.          │
 │ 8. RESPONSIVE PARITY: Visual hierarchy, touch target ergonomics, and   │
 │    reading comfort are maintained across phone, tablet, and desktop.   │
 │ 9. VISUAL CALM IN DENSE DATA: Low-noise surfaces and muted palettes     │
@@ -133,7 +133,7 @@ The color architecture is built entirely on semantic roles. Raw hex values are e
 ```
 
 ### 4.1 Non-Color Redundancy Rule
-Color must never be the sole mechanism used to communicate state, relationship type, or epistemic certainty. Every color-coded element must be accompanied by text labels, distinct iconography, border styles (solid, dashed, dotted), or semantic badges.
+Color must never be the sole mechanism used to communicate state, relationship type, epistemic status, or certainty. Every color-coded element must be accompanied by text labels, distinct iconography, border styles (solid, dashed, dotted), or semantic badges.
 
 ---
 
